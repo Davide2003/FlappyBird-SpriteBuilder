@@ -14,6 +14,14 @@
     CCNode *_ground2;
     NSArray *_grounds;
     
+    CCNode *_cloud1;
+    CCNode *_cloud2;
+    NSArray *_clouds;
+    
+    CCNode *_bush1;
+    CCNode *_bush2;
+    NSArray *_bushes;
+    
     NSTimeInterval _sinceTouch;
     
     NSMutableArray *_obstacles;
@@ -32,6 +40,8 @@
     self.userInteractionEnabled = TRUE;
     
     _grounds = @[_ground1, _ground2];
+    _clouds = @[_cloud1, _cloud2];
+    _bushes = @[_bush1, _bush2];
     
     for (CCNode *ground in _grounds) {
         // set collision txpe
@@ -141,28 +151,33 @@
         // if the left corner is one complete width off the screen, move it to the right
         if (groundScreenPosition.x <= (-1 * ground.contentSize.width)) {
             ground.position = ccp(ground.position.x + 2 * ground.contentSize.width, ground.position.y);
+            
         }
+        
     }
     
-    NSMutableArray *offScreenObstacles = nil;
+}
+
+for (CCNode *bush in _bushes) {
     
-    for (CCNode *obstacle in _obstacles) {
-        CGPoint obstacleWorldPosition = [physicsNode convertToWorldSpace:obstacle.position];
-        CGPoint obstacleScreenPosition = [self convertToNodeSpace:obstacleWorldPosition];
-        if (obstacleScreenPosition.x < -obstacle.contentSize.width) {
-            if (!offScreenObstacles) {
-                offScreenObstacles = [NSMutableArray array];
-            }
-            [offScreenObstacles addObject:obstacle];
-        }
+    bush.position = ccp(bush.position.x - (character.physicsBody.velocity.x * delta), bush.position.y);
+    if (bush.position.x <= (-1 * bush.contentSize.width)) {
+        bush.position = ccp(bush.position.x + 2 * bush.contentSize.width, bush.position.y);
+    
     }
-    
+}
+
+
+{
+
     for (CCNode *obstacleToRemove in offScreenObstacles) {
         [obstacleToRemove removeFromParent];
         [_obstacles removeObject:obstacleToRemove];
     }
-    
+}
+{
     if (!_gameOver)
+        }
     {
         @try
         {
@@ -175,7 +190,8 @@
             
         }
     }
-}
+
+
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair*)pair character:(CCSprite*)character level:(CCNode*)level {
     [self gameOver];
@@ -188,5 +204,7 @@
     _scoreLabel.string = [NSString stringWithFormat:@"%d", points];
     return TRUE;
 }
+
+
 
 @end
