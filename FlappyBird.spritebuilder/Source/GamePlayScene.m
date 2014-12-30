@@ -12,7 +12,7 @@
     [physicsNode addChild:character];
     
     [self addObstacle];
-    timeSincebstacle = =.0f;
+    timeSincebstacle = 0.0f;
 
 }
 
