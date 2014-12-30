@@ -7,6 +7,9 @@
 - (void)initialize
 {
     // your code here
+    
+    character = (Character*)[CCBReader load:@"Character"];
+    [physicsNode addChild:character];
 }
 
 -(void)update:(CCTime)delta
@@ -15,5 +18,39 @@
 }
 
 // put new methods here
+
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    //questo verrà chiamato ogni volta in cui il giocatore tocca lo schermo
+    
+    [character flap];
+    [self addObstacle];
+    
+}
+
+/*
+-(void) doSomething
+
+{
+    NSLog(@"Hello World!");
+}
+
+-(int) doSomethingWithAsString: (NSString*) myString
+
+{
+    
+    /// restituisce la lunghezza dei 10 tempi della stringa
+    return [myString length] * 10;
+}
+ 
+ -(NSArray *) add
+    
+
+
+-(NSArray *) addThisStringToAnArray:(NSString*) firstString andThisString:(NSString*) secondString andAlsoThisString:(NSString*) thirdString
+{
+    return [NSArray arrayWithObjects:firstString,secondString,thirdString, nil];
+}
+ 
+ */
 
 @end
