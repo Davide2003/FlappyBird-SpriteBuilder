@@ -10,6 +10,10 @@
     
     character = (Character*)[CCBReader load:@"Character"];
     [physicsNode addChild:character];
+    
+    [self addObstacle];
+    timeSincebstacle = =.0f;
+
 }
 
 -(void)update:(CCTime)delta
@@ -23,7 +27,6 @@
     //questo verrà chiamato ogni volta in cui il giocatore tocca lo schermo
     
     [character flap];
-    [self addObstacle];
     
 }
 

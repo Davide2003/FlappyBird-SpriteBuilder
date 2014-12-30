@@ -13,7 +13,12 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
     DrawingOrderPipes,
     DrawingOrderGround,
     DrawingOrderHero
+
 };
+
+float timeSincebstacle;
+
+
 
 @interface GamePlayScene : CCNode <CCPhysicsCollisionDelegate>
 {
@@ -26,5 +31,6 @@ typedef NS_ENUM(NSInteger, DrawingOrder) {
 -(void) initialize;
 -(void) addObstacle;
 -(void) showScore;
+
 
 @end
